@@ -8,6 +8,12 @@
   border-bottom: 1px ridge;
   min-height: 400px; }
 
+.tab-row-content {
+  margin: 0px auto;
+  padding: 5px 0px;
+  border-bottom: 1px ridge;
+  min-height: 50px; }
+
 .footer {
   background-color: #D1C4E9;
   margin: 0px auto;

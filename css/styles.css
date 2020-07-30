@@ -67,3 +67,11 @@ body {
 
 .modal-body {
   background: #D1C4E9; }
+
+/* .modal-backdrop{
+  backdrop-filter: blur(5px);
+  background-color: #01223770;
+}
+.modal-backdrop.in{
+  opacity: 1 !important;
+} */

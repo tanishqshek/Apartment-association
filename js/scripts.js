@@ -29,9 +29,21 @@ $(document).ready(function(){
       $('#101Modal').modal('show');
   });
 
+$('#101Modal').on('hidden.bs.modal', function () {
+  // Load up a new modal...
+  $('#101signin').modal('show')
+})
+
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList2 li").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });

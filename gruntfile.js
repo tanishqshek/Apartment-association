@@ -1,18 +1,19 @@
 'use strict';
 
 module.exports = function (grunt) {
-  // Define the configuration for all the tasks
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
 
-  require('time-grunt')(grunt);
-  
-  require('jit-grunt')(grunt, {
-    useminPrepare: 'grunt-usemin'
-  });
+    // Automatically load required Grunt tasks
+    require('jit-grunt')(grunt, {
+        useminPrepare: 'grunt-usemin'
+    });
 
-  grunt.initConfig({
+    // Define the configuration for all the tasks
+    grunt.initConfig({
         sass: {
             dist: {
-                files:{
+                files: {
                     'css/styles.css': 'css/styles.scss'
                 }
             }
@@ -21,24 +22,6 @@ module.exports = function (grunt) {
             files: 'css/*.scss',
             tasks: ['sass']
         },
-        browserSync: {
-            dev: {
-                bsFiles: {
-                    src : [
-                        'css/*.css',
-                        '*.html',
-                        'js/*.js'
-                    ]
-                },
-                options: {
-                    watchTask: true,
-                    server: {
-                        baseDir: "./"
-                    }
-                }
-            }
-        },
-
         copy: {
             html: {
                 files: [
@@ -63,10 +46,26 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
         clean: {
             build: {
                 src: [ 'dist/']
+            }
+        },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        'css/*.css',
+                        '*.html',
+                        'js/*.js'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: "./"
+                    }
+                }
             }
         },
         imagemin: {
@@ -151,38 +150,23 @@ module.exports = function (grunt) {
         // options.assetDirs contains the directories for finding the assets
         // according to their relative paths
         usemin: {
-            html: ['dist/contactus.html','dist/aboutus.html','dist/index.html'],
+            html: ['dist/index.html'],
             options: {
                 assetsDirs: ['dist', 'dist/css','dist/js']
             }
-        },
-
-        htmlmin: {                                         // Task
-            dist: {                                        // Target
-                options: {                                 // Target options
-                    collapseWhitespace: true
-                },
-                files: {                                   // Dictionary of files
-                    'dist/index.html': 'dist/index.html',  // 'destination': 'source'
-                    'dist/contactus.html': 'dist/contactus.html',
-                    'dist/aboutus.html': 'dist/aboutus.html',
-                }
-            }
         }
-  });
+    });
 
-  grunt.registerTask('css',['sass']);
-  grunt.registerTask('default', ['browserSync', 'watch']);
-  grunt.registerTask('build', [
-    'clean',
-    'copy',
-    'imagemin',
-    'useminPrepare',
-    'concat',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin',
-    'htmlmin'
-]);
+    grunt.registerTask('css', ['sass']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
+    grunt.registerTask('build', [
+        'clean',
+        'copy',
+        'imagemin',
+        'useminPrepare',
+        'concat',
+        'cssmin',
+        'filerev',
+        'usemin'
+    ]);
 };
